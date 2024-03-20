@@ -352,7 +352,7 @@ class _EnterPinScreenState extends State<EnterPinScreen> {
 
   title() {
     return const Text(
-      "APEX BANK",
+      "BRISK",
       style: interSemibold22Primary,
       textAlign: TextAlign.center,
     );

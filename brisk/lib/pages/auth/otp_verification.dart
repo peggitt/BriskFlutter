@@ -138,7 +138,7 @@ class _OtpVerificationState extends State<OtpVerification> {
 
   title() {
     return const Text(
-      "APEX BANK",
+      "BRISK",
       style: interSemibold22Primary,
       textAlign: TextAlign.center,
     );

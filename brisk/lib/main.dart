@@ -1,5 +1,6 @@
 import 'package:brisk/localization/localization.dart';
 import 'package:brisk/localization/localization_const.dart';
+import 'package:brisk/pages/accountdetail/loan_application.dart';
 import 'package:brisk/pages/accountdetail/loan_balance.dart';
 import 'package:brisk/pages/accountdetail/loan_detail.dart';
 import 'package:brisk/pages/accountdetail/loan_limit.dart';
@@ -253,6 +254,12 @@ class _MyAppState extends State<MyApp> {
             case '/loanStatement':
               return PageTransition(
                 child: const LoanStatementScreen(),
+                type: PageTransitionType.rightToLeft,
+                settings: settings,
+              );
+            case '/loanApplication':
+              return PageTransition(
+                child: const LoanApplicationScreen(),
                 type: PageTransitionType.rightToLeft,
                 settings: settings,
               );

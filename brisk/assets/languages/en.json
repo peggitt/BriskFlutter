@@ -166,15 +166,19 @@
         "rate_text": "rate"
     },
     "education_loan": {
-        "education_loan": "Education loan",
-        "thank_you": "Thank you for interested education loan we will contact soon",
+        "education_loan": "Brisk loan",
+        "thank_you": "Your loan application has been received. Once processed, you will receive a confirmation message.",
         "okay": "Okay",
-        "interested": "I am interested",
+        "interested": "Apply loan",
         "write_your_message": "Write your message",
         "message": "Message",
         "enter_phone_number": "Enter your phone number",
         "phone_number": "Phone number",
-        "priority": "Make education \n your top priority"
+        "priority": "Apply for a \n loan from your phone",
+        "enter_loan": "Loan Details",
+        "enter_loanamount": "Loan Amount",
+        "enter_expenses": "Estimated Daily Expenses",
+        "enter_sales": "Estimated Daily Sales"
     },
     "fund_transfer": {
         "beneficiary_pay": "Internal \n transfer",

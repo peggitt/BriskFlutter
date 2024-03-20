@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   title() {
     return const Text(
-      "BRISK v1.0",
+      "BRISK v1.01",
       style: interSemibold22Primary,
       textAlign: TextAlign.center,
     );

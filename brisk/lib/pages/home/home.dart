@@ -64,10 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
       "routeName": "/loanbstatement"
     },
     {
-      "image": "assets/home/scanpay.png",
+      "image": "assets/home/receipt.png",
       "name": "Loan Application",
-      "isDetail": false
+      "isDetail": true,
+      "routeName": "/loanApplication"
     },
+
+    {"image": "assets/home/receipt.png", "name": "Bill pay", "isDetail": false},
   ];
 
   @override
