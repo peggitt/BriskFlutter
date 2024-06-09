@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 
 class LoansScreen extends StatefulWidget {
-  const LoansScreen({Key? key}) : super(key: key);
+  const LoansScreen({super.key});
 
   @override
   State<LoansScreen> createState() => _LoansScreenState();

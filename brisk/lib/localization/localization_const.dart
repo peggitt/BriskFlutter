@@ -2,7 +2,6 @@ import 'package:brisk/localization/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'localization.dart';
 
 String getTranslation(BuildContext context, String key) {
   return DemoLocalizations.of(context).getTranslation(key);

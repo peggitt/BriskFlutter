@@ -4,7 +4,7 @@ import 'package:brisk/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferSuccessGroupsScreen extends StatefulWidget {
-  const TransferSuccessGroupsScreen({Key? key}) : super(key: key);
+  const TransferSuccessGroupsScreen({super.key});
 
   @override
   State<TransferSuccessGroupsScreen> createState() => _TransferSuccessGroupsScreenState();

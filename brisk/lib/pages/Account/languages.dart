@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 String? selectedValue;
 
 class LanguagesScreen extends StatefulWidget {
-  const LanguagesScreen({Key? key}) : super(key: key);
+  const LanguagesScreen({super.key});
 
   @override
   State<LanguagesScreen> createState() => _LanguagesScreenState();

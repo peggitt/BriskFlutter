@@ -1,12 +1,16 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:brisk/localization/localization_const.dart';
 import 'package:brisk/widget/column_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../constants/datapull.dart';
 import '../../theme/theme.dart';
 
 class LoanDetailScreen extends StatefulWidget {
-  const LoanDetailScreen({Key? key}) : super(key: key);
+  const LoanDetailScreen({super.key});
 
   @override
   State<LoanDetailScreen> createState() => _LoanDetailScreenState();
@@ -16,33 +20,19 @@ class _LoanDetailScreenState extends State<LoanDetailScreen> {
   String? accountType;
   int selIndex=0;
 
+  get builder => null;
+
   @override
   void initState() {
-    setState(()  {
-      if(returnDetails.isNotEmpty) {
-        accountType = returnDetails[0]['AccountID'].toString();
-        detailsAccountId = returnDetails[0]['AccountID'].toString();
-        detailsAccountIdBalance = returnDetails[0]['Clearbalance'].toString();
-        selIndex=0;
-        initializeIdentifier();
-      }else
-      {
-        accountType = 'NA';
-      }
-    });
-    super.initState();
-  }
 
-  Future<void> initializeIdentifier() async {
-    setState(() async {
-      // Trigger a rebuild to update the UI with the identifier value
-      await GetLoanDetails(returnDetails[0]['AccountID'].toString());
-    });
+    super.initState();
   }
 
 
   @override
   Widget build(BuildContext context) {
+    print('Here already');
+    print( returnLoanDetails[0]);
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -65,7 +55,7 @@ class _LoanDetailScreenState extends State<LoanDetailScreen> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(fixPadding * 2),
         children: [
-          bankAccountType(context),
+          //bankAccountType(context),
           heightSpace,
           heightSpace,
           totalbalanceinfo(),
@@ -73,6 +63,7 @@ class _LoanDetailScreenState extends State<LoanDetailScreen> {
           heightSpace,
           accountDetailTitle(),
           heightSpace,
+
           detailTile(
               getTranslation(context, 'account_detail.loan_amount'), returnLoanDetails[0]['loan_amount'].toString()),
           heightSpace,
@@ -182,7 +173,7 @@ class _LoanDetailScreenState extends State<LoanDetailScreen> {
                   style: semibold14Grey94,
                 ),
                 Text(
-                  returnAccountDetails[0]['Description'].toString(),
+                  returnLoanDetails[0]['ProductId'].toString(),
                   style: semibold15Black33,
                 )
               ],
@@ -206,6 +197,49 @@ class _LoanDetailScreenState extends State<LoanDetailScreen> {
       ),
     );
   }
+
+  void showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 5),
+          content: Text(message),
+          backgroundColor: Colors.blue, // Optional background color
+          behavior: SnackBarBehavior.floating, // Optional behavior
+        )
+    );
+  }
+
+  waitDialog() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: fixPadding * 3, horizontal: fixPadding),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SpinKitFadingCircle(
+                color: primaryColor,
+                size: 40,
+              ),
+              heightSpace,
+              Text(
+                getTranslation(context, 'enter_pin.please_wait'),
+                style: bold16Primary,
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
 
   bankAccountType(BuildContext context) {
     return Center(
@@ -235,7 +269,7 @@ class _LoanDetailScreenState extends State<LoanDetailScreen> {
                             onTap: () {
                               setState(() {
                                 accountType =
-                                    returnDetails[index]['AccountID'].toString();
+                                    returnDetails[0]['AccountID'].toString();
                                 GetAccountDetails(accountType);
                               });
                               Navigator.pop(context);

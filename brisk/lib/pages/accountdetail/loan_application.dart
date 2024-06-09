@@ -1,10 +1,15 @@
+import 'dart:async';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:brisk/localization/localization_const.dart';
 import 'package:brisk/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../../constants/datapull.dart';
 
 class LoanApplicationScreen extends StatefulWidget {
-  const LoanApplicationScreen({Key? key}) : super(key: key);
+  const LoanApplicationScreen({super.key});
 
   @override
   State<LoanApplicationScreen> createState() => _LoanAppicationState();
@@ -75,8 +80,9 @@ class _LoanAppicationState extends State<LoanApplicationScreen> {
 
   iamInterestedButton() {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
 
+        String? AppStatus;
         String eLoan = loanamountController.text;
         String eSales = dailysalesController.text;
         String eExpenses = dailyexpensesController.text;
@@ -99,52 +105,69 @@ class _LoanAppicationState extends State<LoanApplicationScreen> {
           return;
         }
 
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            backgroundColor: whiteColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            contentPadding: const EdgeInsets.all(fixPadding * 2),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  getTranslation(context, 'education_loan.education_loan'),
-                  style: bold18Primary,
-                  textAlign: TextAlign.center,
-                ),
-                heightSpace,
-                Text(
-                  getTranslation(context, 'education_loan.thank_you'),
-                  style: bold16Black33,
-                  textAlign: TextAlign.center,
-                ),
-                const Divider(
-                  thickness: 1.5,
-                  color: greyD9Color,
-                  height: 30,
-                ),
-                Center(
-                  child: InkWell(
-                    onTap: () {
+        waitDialog();
+        Timer(const Duration(seconds: 3), () async {
+          AppStatus = await  DoLoanApplication(returnDetails[0]['AccountID'].toString(),eLoan,eExpenses,eSales);
+          Navigator.of(context).pop();
+
+          if(AppStatus=="Error")
+          {
+            showErrorMessage('Loan Application did not go through! Please try again later.');
+          }else {
+            //Do the Loan Application Here
 
 
-
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      getTranslation(context, 'education_loan.okay'),
-                      style: bold18Primary,
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  AlertDialog(
+                    backgroundColor: whiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    contentPadding: const EdgeInsets.all(fixPadding * 2),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          getTranslation(
+                              context, 'education_loan.education_loan'),
+                          style: bold18Primary,
+                          textAlign: TextAlign.center,
+                        ),
+                        heightSpace,
+                        Text(
+                          getTranslation(context, 'education_loan.thank_you'),
+                          style: bold16Black33,
+                          textAlign: TextAlign.center,
+                        ),
+                        const Divider(
+                          thickness: 1.5,
+                          color: greyD9Color,
+                          height: 30,
+                        ),
+                        Center(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              getTranslation(context, 'education_loan.okay'),
+                              style: bold18Primary,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-        );
+            );
+          }
+
+
+        });
+
+
       },
       child: Container(
         width: double.maxFinite,
@@ -362,11 +385,42 @@ class _LoanAppicationState extends State<LoanApplicationScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior
         )
+    );
+  }
+
+  waitDialog() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: fixPadding * 3, horizontal: fixPadding),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SpinKitFadingCircle(
+                color: primaryColor,
+                size: 40,
+              ),
+              heightSpace,
+              Text(
+                getTranslation(context, 'enter_pin.please_wait'),
+                style: bold16Primary,
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 

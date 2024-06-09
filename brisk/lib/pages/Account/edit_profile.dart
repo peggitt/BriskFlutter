@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../constants/datapull.dart';
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  const EditProfile({super.key});
 
   @override
   State<EditProfile> createState() => _EditProfileState();

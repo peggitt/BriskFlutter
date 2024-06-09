@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 
 class TransactionScreen extends StatefulWidget {
-  const TransactionScreen({Key? key}) : super(key: key);
+  const TransactionScreen({super.key});
 
   @override
   State<TransactionScreen> createState() => _TransactionScreenState();

@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import '../../theme/theme.dart';
 
 class ServicesScreen extends StatefulWidget {
-  const ServicesScreen({Key? key}) : super(key: key);
+  const ServicesScreen({super.key});
 
   @override
   State<ServicesScreen> createState() => _ServicesScreenState();

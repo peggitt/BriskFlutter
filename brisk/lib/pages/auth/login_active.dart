@@ -13,7 +13,7 @@ import '../../theme/theme.dart';
 import 'package:http/http.dart' as http;
 
 class LoginActiveScreen extends StatefulWidget {
-  const LoginActiveScreen({Key? key}) : super(key: key);
+  const LoginActiveScreen({super.key});
 
   @override
   State<LoginActiveScreen> createState() => _EnterPinScreenState();
@@ -261,17 +261,19 @@ class _EnterPinScreenState extends State<LoginActiveScreen> {
                 APIauthToken = jsonResponse['Token'];
                 AccessType = jsonResponse['AccessType'];
                 String identifier  = await GetAccounts();
-                String identifier2  = await GetAccountDetails(returnDetails[0]['AccountID'].toString());
-                String identifier3  = await GetLoanDetails(returnDetails[0]['AccountID'].toString());
-                String identifier4  = await GetLoanBalance(returnDetails[0]['AccountID'].toString());
-                String identifier5 = await GetLoanLimit(returnDetails[0]['AccountID'].toString());
+                GlobalAccount  = returnDetails[0]['AccountID'].toString();
+                //GlobalAccount  = await GetAccountDetails(returnDetails[0]['AccountID'].toString());
+                //String identifier3  = await GetLoanDetails(returnDetails[0]['AccountID'].toString());
+                //String identifier4  = await GetLoanBalance(returnDetails[0]['AccountID'].toString());
+                //String identifier5 = await GetLoanLimit(returnDetails[0]['AccountID'].toString());
 
                 Navigator.of(context).pop();
                 //print(APIauthToken);
-                if(AccessType == 'Officer')
+                if(AccessType == 'Officer') {
                   Navigator.pushNamed(context, '/bottomNavigationLoanOfficer');
-                else
+                } else {
                   Navigator.pushNamed(context, '/bottomNavigation');
+                }
 
               }
             } else {
@@ -282,7 +284,7 @@ class _EnterPinScreenState extends State<LoginActiveScreen> {
           } catch (error) {
             // Handle network-related errors
             Navigator.of(context).pop();
-            showErrorMessage('Network error during Login: $error');
+            showErrorMessage('No Active loan accounts found!');
           }
 
 
@@ -513,7 +515,7 @@ class _EnterPinScreenState extends State<LoginActiveScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior
@@ -526,14 +528,14 @@ class _EnterPinScreenState extends State<LoginActiveScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alert..'),
+          title: const Text('Alert..'),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

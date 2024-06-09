@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:brisk/localization/localization_const.dart';
@@ -7,14 +6,11 @@ import 'package:brisk/widget/column_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/constants.dart';
 import '../../constants/datapull.dart';
-import '../../theme/theme.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class HomeAgentScreen extends StatefulWidget {
-  const HomeAgentScreen({Key? key}) : super(key: key);
+  const HomeAgentScreen({super.key});
 
   @override
   State<HomeAgentScreen> createState() => _HomeScreenAgentState();
@@ -428,7 +424,7 @@ class _HomeScreenAgentState extends State<HomeAgentScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior

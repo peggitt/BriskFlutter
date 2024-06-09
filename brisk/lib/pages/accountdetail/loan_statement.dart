@@ -6,7 +6,7 @@ import '../../constants/datapull.dart';
 import '../../theme/theme.dart';
 
 class LoanBStatementScreen extends StatefulWidget {
-  const LoanBStatementScreen({Key? key}) : super(key: key);
+  const LoanBStatementScreen({super.key});
 
   @override
   State<LoanBStatementScreen> createState() => _LoanBStatementScreenState();
@@ -18,28 +18,9 @@ class _LoanBStatementScreenState extends State<LoanBStatementScreen> {
 
   @override
   void initState() {
-    setState(() {
-      if(returnDetails.isNotEmpty) {
-        accountType = returnDetails[0]['AccountID'].toString();
-        detailsAccountId = returnDetails[0]['AccountID'].toString();
-        detailsAccountIdBalance = returnDetails[0]['Clearbalance'].toString();
-        selIndex=0;
-        initializeIdentifier();
-      }else
-      {
-        accountType = 'NA';
-      }
-    });
     super.initState();
   }
 
-  Future<void> initializeIdentifier() async {
-    setState(() async {
-      // Trigger a rebuild to update the UI with the identifier value
-      await GetLoanStatement(returnDetails[0]['AccountID'].toString());
-      print(returnLoanStatement);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +46,7 @@ class _LoanBStatementScreenState extends State<LoanBStatementScreen> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(fixPadding * 2),
         children: [
-          bankAccountType(context),
+          //bankAccountType(context),
           heightSpace,
           heightSpace,
           totalbalanceinfo(),

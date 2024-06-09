@@ -1,4 +1,5 @@
-import 'dart:convert';
+
+import 'dart:async';
 
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:brisk/localization/localization_const.dart';
@@ -6,15 +7,13 @@ import 'package:brisk/theme/theme.dart';
 import 'package:brisk/widget/column_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../../constants/constants.dart';
 import '../../constants/datapull.dart';
-import '../../theme/theme.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -70,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
       "routeName": "/loanApplication"
     },
 
-    {"image": "assets/home/receipt.png", "name": "Bill pay", "isDetail": false},
   ];
 
   @override
@@ -136,12 +134,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Loan Details",
                       style: bold15Black33,
                     ),
                     heightBox(3.0),
-                    Text(
+                    const Text(
                       "Loan Balance",
                       style: bold12Grey94,
                     )
@@ -198,14 +196,54 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         for (int i = 0; i < servicelist.length; i++)
           GestureDetector(
-            onTap: () {
+            onTap: () async {
 
-              if (servicelist[i]['isDetail'] == true) {
-                Navigator.pushNamed(
-                  context,
-                  servicelist[i]['routeName'].toString(),
-                );
-              }
+              waitDialog();
+              Timer(const Duration(seconds: 3), () async {
+                String? accountType;
+                accountType = returnDetails[0]['AccountID'].toString();
+                detailsAccountId = returnDetails[0]['AccountID'].toString();
+                detailsAccountIdBalance = returnDetails[0]['Clearbalance'].toString();
+
+                if(servicelist[i]['routeName'].toString()=="/account") {
+                  await GetAccountDetails(accountType);
+                }
+
+                if(servicelist[i]['routeName'].toString()=="/loandetails") {
+                  await GetLoanDetails(
+                      returnDetails[0]['AccountID'].toString());
+                }
+
+                if(servicelist[i]['routeName'].toString()=="/loanbstatement") {
+                  await GetLoanStatement(returnDetails[0]['AccountID'].toString());
+                }
+
+                if(servicelist[i]['routeName'].toString()=="/loanlimit") {
+                  await GetLoanLimit(returnDetails[0]['AccountID'].toString());
+                }
+
+                if(servicelist[i]['routeName'].toString()=="/loanbalance") {
+                  await GetLoanBalance(returnDetails[0]['AccountID'].toString());
+                }
+
+
+
+
+
+
+
+
+                Navigator.of(context).pop();
+
+                if (servicelist[i]['isDetail'] == true) {
+                  Navigator.pushNamed(context,servicelist[i]['routeName'].toString(),
+                  );
+                }
+              });
+
+
+
+
             },
             child: Container(
               padding: const EdgeInsets.all(fixPadding),
@@ -390,7 +428,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior
@@ -413,6 +451,36 @@ class _HomeScreenState extends State<HomeScreen> {
     return formattedNumber;
   }
 
+  waitDialog() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: fixPadding * 3, horizontal: fixPadding),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SpinKitFadingCircle(
+                color: primaryColor,
+                size: 40,
+              ),
+              heightSpace,
+              Text(
+                getTranslation(context, 'enter_pin.please_wait'),
+                style: bold16Primary,
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
 
 
 }

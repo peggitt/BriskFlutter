@@ -6,7 +6,7 @@ import 'package:brisk/widget/column_builder.dart';
 import 'package:flutter/material.dart';
 
 class DepositScreen extends StatefulWidget {
-  const DepositScreen({Key? key}) : super(key: key);
+  const DepositScreen({super.key});
 
   @override
   State<DepositScreen> createState() => _DepositScreenState();

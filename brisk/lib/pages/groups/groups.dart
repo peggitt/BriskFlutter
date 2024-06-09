@@ -10,7 +10,7 @@ import '../../theme/theme.dart';
 import 'package:http/http.dart' as http;
 
 class GroupsScreen extends StatefulWidget {
-  const GroupsScreen({Key? key}) : super(key: key);
+  const GroupsScreen({super.key});
 
   @override
   State<GroupsScreen> createState() => _GroupsScreenState();
@@ -232,7 +232,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
               ),
             ),
           ),
-          SizedBox(width: 8.0), // Adjust the spacing between the TextField and the button
+          const SizedBox(width: 8.0), // Adjust the spacing between the TextField and the button
           ElevatedButton(
             onPressed: () async{
               String groupId='';
@@ -305,7 +305,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
 
                   }
             },
-            child: Text('Search'),
+            child: const Text('Search'),
           ),
           heightSpace,
           heightSpace,
@@ -813,18 +813,18 @@ class _GroupsScreenState extends State<GroupsScreen> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Confirmation'),
-                    content: Text('Are you sure you want to add '+ Name1+' '+Name2+' '+Name3+' to the Group?'),
+                    title: const Text('Confirmation'),
+                    content: Text('Are you sure you want to add $Name1 $Name2 $Name3 to the Group?'),
                     actions: [
                       TextButton(
-                        child: Text('Cancel'),
+                        child: const Text('Cancel'),
                         onPressed: () {
                           newMemberIdController.text='';
                           Navigator.of(context).pop(); // Close the dialog
                         },
                       ),
                       TextButton(
-                        child: Text('Confirm'),
+                        child: const Text('Confirm'),
                         onPressed: () {
 
 
@@ -869,7 +869,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.red, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior
@@ -880,7 +880,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
   void showInfoMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior

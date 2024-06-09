@@ -3,7 +3,7 @@ import 'package:brisk/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomerSupportScreen extends StatefulWidget {
-  const CustomerSupportScreen({Key? key}) : super(key: key);
+  const CustomerSupportScreen({super.key});
 
   @override
   State<CustomerSupportScreen> createState() => _CustomerSupportScreenState();

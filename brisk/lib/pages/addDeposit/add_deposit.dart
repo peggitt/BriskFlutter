@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../widget/column_builder.dart';
 
 class AddDepositScreen extends StatefulWidget {
-  const AddDepositScreen({Key? key}) : super(key: key);
+  const AddDepositScreen({super.key});
 
   @override
   State<AddDepositScreen> createState() => _AddDepositScreenState();

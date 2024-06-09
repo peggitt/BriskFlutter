@@ -11,7 +11,7 @@ import '../groups/groups.dart';
 import '../loans/grouploans.dart';
 
 class AgentServicesScreen extends StatefulWidget {
-  const AgentServicesScreen({Key? key}) : super(key: key);
+  const AgentServicesScreen({super.key});
 
   @override
   State<AgentServicesScreen> createState() => _AgentServicesScreenState();

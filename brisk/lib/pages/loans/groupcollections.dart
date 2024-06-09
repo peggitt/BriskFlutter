@@ -12,7 +12,7 @@ import '../../theme/theme.dart';
 import 'package:http/http.dart' as http;
 
 class GroupCollectionsScreen extends StatefulWidget {
-  const GroupCollectionsScreen({Key? key}) : super(key: key);
+  const GroupCollectionsScreen({super.key});
 
   @override
   State<GroupCollectionsScreen> createState() => _GroupCollectionsScreenState();
@@ -226,7 +226,7 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
               ),
             ),
           ),
-          SizedBox(width: 8.0), // Adjust the spacing between the TextField and the button
+          const SizedBox(width: 8.0), // Adjust the spacing between the TextField and the button
           ElevatedButton(
             onPressed: () async{
 
@@ -305,7 +305,7 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
 
               }
             },
-            child: Text('Search'),
+            child: const Text('Search'),
           ),
           heightSpace,
           heightSpace,
@@ -417,7 +417,7 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
                       initialValue: returnMembers[index]['LoanCollectionAmount'].toString(),
                       style: bold12Grey94,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Loan Repayment',
                       ),
                       inputFormatters: [
@@ -433,7 +433,7 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
                       initialValue: returnMembers[index]['SavingsCollection'].toString(),
                       style: bold12Grey94,
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Savings Amount',
                       ),
                       inputFormatters: [
@@ -947,18 +947,18 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Confirmation'),
-              content: Text('Are you sure you want to post Loan Repayments totalling '+ sumLoans.toString()!+' and Group Savings totalling '+sumSavings.toString()!+' for the Group?'),
+              title: const Text('Confirmation'),
+              content: Text('Are you sure you want to post Loan Repayments totalling ${sumLoans.toString()} and Group Savings totalling ${sumSavings.toString()} for the Group?'),
               actions: [
                 TextButton(
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                   onPressed: () {
                     newMemberIdController.text='';
                     Navigator.of(context).pop(); // Close the dialog
                   },
                 ),
                 TextButton(
-                  child: Text('Confirm'),
+                  child: const Text('Confirm'),
                   onPressed: () {
 
                     //Post Transaction
@@ -1008,7 +1008,7 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.red, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior
@@ -1019,7 +1019,7 @@ class _GroupCollectionsScreenState extends State<GroupCollectionsScreen> {
   void showInfoMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior

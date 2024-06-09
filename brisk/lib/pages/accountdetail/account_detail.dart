@@ -1,12 +1,15 @@
+import 'dart:async';
+
 import 'package:brisk/localization/localization_const.dart';
 import 'package:brisk/widget/column_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../constants/datapull.dart';
 import '../../theme/theme.dart';
 
 class AccountDetailScreen extends StatefulWidget {
-  const AccountDetailScreen({Key? key}) : super(key: key);
+  const AccountDetailScreen({super.key});
 
   @override
   State<AccountDetailScreen> createState() => _AccountDetailScreenState();
@@ -18,20 +21,10 @@ class _AccountDetailScreenState extends State<AccountDetailScreen> {
 
   @override
   void initState() {
-    setState(() {
-      if(returnDetails.isNotEmpty) {
-        accountType = returnDetails[0]['AccountID'].toString();
-        detailsAccountId = returnDetails[0]['AccountID'].toString();
-        detailsAccountIdBalance = returnDetails[0]['Clearbalance'].toString();
-        selIndex=0;
-        GetAccountDetails(accountType);
-      }else
-        {
-          accountType = 'NA';
-        }
-    });
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +50,7 @@ class _AccountDetailScreenState extends State<AccountDetailScreen> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(fixPadding * 2),
         children: [
-          bankAccountType(context),
+          //bankAccountType(context),
           heightSpace,
           heightSpace,
           totalbalanceinfo(),
@@ -198,6 +191,37 @@ class _AccountDetailScreenState extends State<AccountDetailScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  waitDialog() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: whiteColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: fixPadding * 3, horizontal: fixPadding),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SpinKitFadingCircle(
+                color: primaryColor,
+                size: 40,
+              ),
+              heightSpace,
+              Text(
+                getTranslation(context, 'enter_pin.please_wait'),
+                style: bold16Primary,
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 

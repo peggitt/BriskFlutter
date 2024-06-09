@@ -5,7 +5,7 @@ import 'package:brisk/widget/column_builder.dart';
 import 'package:flutter/material.dart';
 
 class LoanStatementScreen extends StatefulWidget {
-  const LoanStatementScreen({Key? key}) : super(key: key);
+  const LoanStatementScreen({super.key});
 
   @override
   State<LoanStatementScreen> createState() => _LoanStatementScreenState();

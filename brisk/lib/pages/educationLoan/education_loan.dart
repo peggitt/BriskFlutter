@@ -4,7 +4,7 @@ import 'package:brisk/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class EducationLoan extends StatefulWidget {
-  const EducationLoan({Key? key}) : super(key: key);
+  const EducationLoan({super.key});
 
   @override
   State<EducationLoan> createState() => _EducationLoanState();

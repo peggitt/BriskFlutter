@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:brisk/localization/localization_const.dart';
 import 'package:brisk/pages/Account/account.dart';
 import 'package:brisk/pages/deposit/deposit.dart';
-import 'package:brisk/pages/home/home.dart';
 import 'package:brisk/pages/home/home_agent.dart';
 import 'package:brisk/pages/loans/loans.dart';
 import 'package:brisk/theme/theme.dart';
@@ -11,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BottomNavigationAgentScreen extends StatefulWidget {
-  const BottomNavigationAgentScreen({Key? key, this.id}) : super(key: key);
+  const BottomNavigationAgentScreen({super.key, this.id});
 
   final int? id;
 

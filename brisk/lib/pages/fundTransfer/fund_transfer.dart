@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import '../../constants/constants.dart';
 
 class FundTransferScreen extends StatefulWidget {
-  const FundTransferScreen({Key? key}) : super(key: key);
+  const FundTransferScreen({super.key});
 
   @override
   State<FundTransferScreen> createState() => _FundTransferScreenState();
@@ -813,7 +813,7 @@ class _FundTransferScreenState extends State<FundTransferScreen> {
   void showErrorMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          duration: Duration(seconds: 5),
+          duration: const Duration(seconds: 5),
           content: Text(message),
           backgroundColor: Colors.blue, // Optional background color
           behavior: SnackBarBehavior.floating, // Optional behavior

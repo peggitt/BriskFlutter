@@ -1,14 +1,13 @@
 import 'package:brisk/localization/localization_const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/datapull.dart';
 import '../../theme/theme.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

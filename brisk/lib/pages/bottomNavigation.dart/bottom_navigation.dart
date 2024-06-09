@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
-  const BottomNavigationScreen({Key? key, this.id}) : super(key: key);
+  const BottomNavigationScreen({super.key, this.id});
 
   final int? id;
 
@@ -33,9 +33,8 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   final pages = [
     const HomeScreen(),
-    const DepositScreen(),
-    const LoansScreen(),
     const AccountScreen(),
+
   ];
 
   @override
@@ -76,40 +75,8 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
                   icon: const Icon(Icons.home_outlined),
                   label: getTranslation(context, 'bottom_navigation.home')),
               BottomNavigationBarItem(
-                  icon: Image.asset(
-                    "assets/bottomNavigation/Glyph_ undefined.png",
-                    height: 24,
-                    width: 24,
-                    color: grey94Color,
-                    fit: BoxFit.cover,
-                  ),
-                  activeIcon: Image.asset(
-                    "assets/bottomNavigation/Glyph_ undefined.png",
-                    height: 24,
-                    width: 24,
-                    color: primaryColor,
-                    fit: BoxFit.cover,
-                  ),
-                  label: getTranslation(context, 'bottom_navigation.deposit')),
-              BottomNavigationBarItem(
-                  icon: Image.asset(
-                    "assets/bottomNavigation/money-16-regular.png",
-                    height: 24,
-                    width: 24,
-                    color: grey94Color,
-                    fit: BoxFit.cover,
-                  ),
-                  activeIcon: Image.asset(
-                    "assets/bottomNavigation/money-16-regular.png",
-                    height: 24,
-                    width: 24,
-                    color: primaryColor,
-                    fit: BoxFit.cover,
-                  ),
-                  label: getTranslation(context, 'bottom_navigation.loans')),
-              BottomNavigationBarItem(
                   icon: const Icon(Icons.person_outline),
-                  label: getTranslation(context, 'bottom_navigation.account'))
+                  label: getTranslation(context, 'bottom_navigation.account')),
             ],
           ),
         ),

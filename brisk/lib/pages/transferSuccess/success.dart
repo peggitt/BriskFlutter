@@ -5,7 +5,7 @@ import 'package:brisk/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class TransferSuccessScreen extends StatefulWidget {
-  const TransferSuccessScreen({Key? key}) : super(key: key);
+  const TransferSuccessScreen({super.key});
 
   @override
   State<TransferSuccessScreen> createState() => _TransferSuccessScreenState();

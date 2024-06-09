@@ -8,7 +8,7 @@ import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
 import '../../theme/theme.dart';
 
 class OtpVerification extends StatefulWidget {
-  const OtpVerification({Key? key}) : super(key: key);
+  const OtpVerification({super.key});
 
   @override
   State<OtpVerification> createState() => _OtpVerificationState();

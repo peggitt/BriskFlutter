@@ -2,19 +2,20 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'constants.dart';
 
-late List<dynamic> returnDetails=[];
-late List<dynamic> statementData=[];
-late List<dynamic> returnAccountDetails=[];
-late List<dynamic> returnAccountStatementDetails=[];
+List<dynamic> returnDetails=[];
+List<dynamic> statementData=[];
+List<dynamic> returnAccountDetails=[];
+List<dynamic> returnAccountStatementDetails=[];
 
-late List<dynamic> returnLoanDetails=[];
-late List<dynamic> returnLoanBalance=[];
-late List<dynamic> returnLoanLimit=[];
-late List<dynamic> returnLoanStatement=[];
+List<dynamic> returnLoanDetails=[];
+List<dynamic> returnLoanBalance=[];
+List<dynamic> returnLoanLimit=[];
+List<dynamic> returnLoanStatement=[];
 
 String detailsAccountId='';
 String detailsAccountIdBalance='';
 String detailsAccountName='';
+String GlobalAccount = '';
 
 String postGroupId='';
 String postGroupGl='';
@@ -47,17 +48,18 @@ async {
     Map<String, dynamic> jsonResponse = json.decode(response.body);
     //print(jsonResponse);
     returnDetails = jsonResponse['returnDetails'];
-    print(returnDetails);
     statementData = jsonResponse['statementdata'];
     return 'Done';
   } catch (error) {
     // Handle network-related errors
+    //print(error);
     return 'Done';
   }
 }
 
 Future<String> GetAccountDetails(AccountId)
 async {
+
   final String token = APIauthToken;
 
   final Map<String, String> headers = {
@@ -262,3 +264,47 @@ async {
     return 'Done';
   }
 }
+
+
+
+Future<String> DoLoanApplication(AccountId,LoanAmount,DailyExpenses,DailySales)
+async {
+  final String token = APIauthToken;
+  int ResStatus = 0;
+
+  final Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
+  //Call Core to Populate the data Below
+  Map<String, String> requestBody = {
+    'MobileNumber': AppMobile,
+    'DeviceNumber': deviceCode,
+    'AccountNumber': AccountId,
+    'loan_amount': LoanAmount,
+    'estimated_daily_sales': DailySales,
+    'daily_expenses': DailyExpenses
+  };
+  print('Calling Loan Application..');
+  try   {
+    var response = await http.post(
+      Uri.parse(APILoanApplicationBrisk),
+      body: jsonEncode(requestBody),
+      headers: headers,
+    );
+    Map<String, dynamic> jsonResponse = json.decode(response.body);
+    ResStatus = jsonResponse['status'];
+    if (ResStatus == 200) {
+      return 'Done';
+    }
+    else
+      {
+        return 'Error';
+      }
+
+  } catch (error) {
+    // Handle network-related errors
+    return 'Error';
+  }
+}
+

@@ -26,7 +26,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   static void setLocale(BuildContext context, Locale locale) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>()!;
@@ -149,6 +149,7 @@ class _MyAppState extends State<MyApp> {
                 settings: settings,
               );
             case '/loandetails':
+              //showErrorMessage('Loading');
               return PageTransition(
                 child: const LoanDetailScreen(),
                 type: PageTransitionType.rightToLeft,
@@ -329,4 +330,17 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+
+  void showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 5),
+          content: Text(message),
+          backgroundColor: Colors.blue, // Optional background color
+          behavior: SnackBarBehavior.floating, // Optional behavior
+        )
+    );
+  }
+
 }

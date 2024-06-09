@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../theme/theme.dart';
 
 class TermsAndConditionScreen extends StatelessWidget {
-  const TermsAndConditionScreen({Key? key}) : super(key: key);
+  const TermsAndConditionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

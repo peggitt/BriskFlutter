@@ -3,7 +3,7 @@ import 'package:brisk/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class ChangePinScreen extends StatefulWidget {
-  const ChangePinScreen({Key? key}) : super(key: key);
+  const ChangePinScreen({super.key});
 
   @override
   State<ChangePinScreen> createState() => _ChangePinScreenState();

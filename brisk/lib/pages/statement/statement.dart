@@ -8,7 +8,7 @@ import '../../theme/theme.dart';
 import '../../widget/column_builder.dart';
 
 class StatementScreen extends StatefulWidget {
-  const StatementScreen({Key? key}) : super(key: key);
+  const StatementScreen({super.key});
 
   @override
   State<StatementScreen> createState() => _StatementScreenState();
@@ -69,7 +69,7 @@ class _StatementScreenState extends State<StatementScreen> {
         padding: const EdgeInsets.symmetric(vertical: fixPadding * 2),
         physics: const BouncingScrollPhysics(),
         children: [
-          statementDetail(context),
+          //statementDetail(context),
           heightSpace,
           heightSpace,
           dottedBorder(),
